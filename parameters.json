@@ -1,0 +1,51 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sharedPrefix": {
+      "value": "__sharedPrefix__"
+    },
+    "envType": {
+      "value": "__envType__"
+    },
+    "sqlServerAdminPassword": {
+      "value": "__sqlAdminPassword__"
+    },
+    "sqlServerAdminUserName": {
+      "value": "__sqlAdminLogin__"
+    },
+    "sqlServerActiveDirectoryAdminLogin": {
+      "value": "__sqlAdGroupName__"
+    },
+    "sqlServerActiveDirectoryAdminObjectId": {
+      "value": "__sqlAdGroupObjectID__"
+    },
+    "virtualNetworkRoutedSubnets": {
+      "value": "__virtualNetworkRoutedSubnets__"
+    },
+    "virtualNetworkNonRoutedSubnets": {
+      "value": "__virtualNetworkNonRoutedSubnets__"
+    },
+    "threatDetectionEmailAddress": {
+      "value": "__threatDetectionEmailAddress__"
+    },
+    "msqlVnetName": {
+      "value": "__msqlVnetName__"
+    },
+    "msqlSubnetName": {
+      "value": "__msqlSubnetName__"
+    },
+    "msqlNetworkSecurityGroup": {
+      "value": "__msqlNetworkSecurityGroup__"
+    },
+    "deployManageSql": {
+      "value": "__deployManageSql__"
+    },
+    "msqlResourceGroupName": {
+      "value": "__msqlResourceGroupName__"
+    },
+    "vnetResourceGroup": {
+      "value": "__vnetResourceGroup__"
+    }
+  }
+}
