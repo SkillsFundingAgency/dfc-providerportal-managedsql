@@ -83,7 +83,6 @@
       "name": "sharedManagedInstanceEnvironment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-05-10",
-      "condition": "[equals(parameters('envType'),'dev')]",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
