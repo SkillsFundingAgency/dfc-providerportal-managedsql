@@ -43,9 +43,6 @@
     },
     "msqlResourceGroupName": {
       "value": "__msqlResourceGroupName__"
-    },
-    "vnetResourceGroup": {
-      "value": "__vnetResourceGroup__"
     }
   }
 }
