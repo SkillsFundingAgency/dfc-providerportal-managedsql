@@ -5,9 +5,6 @@
     "sharedPrefix": {
       "value": "__sharedPrefix__"
     },
-    "envType": {
-      "value": "__envType__"
-    },
     "sqlServerAdminPassword": {
       "value": "__sqlAdminPassword__"
     },
@@ -26,23 +23,14 @@
     "virtualNetworkNonRoutedSubnets": {
       "value": "__virtualNetworkNonRoutedSubnets__"
     },
-    "threatDetectionEmailAddress": {
-      "value": "__threatDetectionEmailAddress__"
-    },
     "msqlVnetName": {
       "value": "__msqlVnetName__"
     },
     "msqlSubnetName": {
       "value": "__msqlSubnetName__"
     },
-    "msqlNetworkSecurityGroup": {
-      "value": "__msqlNetworkSecurityGroup__"
-    },
     "deployManageSql": {
       "value": "__deployManageSql__"
-    },
-    "msqlResourceGroupName": {
-      "value": "__msqlResourceGroupName__"
     }
   }
 }

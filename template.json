@@ -8,12 +8,6 @@
         "description": "Prefix for all resources created for the project (except storage account, see below). Should be in the format dfc-env-proj"
       }
     },
-    "envType": {
-      "type": "string",
-      "metadata": {
-        "description": "Type of environment, either dev or prod"
-      }
-    },
     "sqlServerAdminUserName": {
       "type": "string",
       "metadata": {

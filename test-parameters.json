@@ -5,9 +5,6 @@
     "sharedPrefix": {
       "value": "dfc-local-shared"
     },
-    "envType": {
-      "value": "dev"
-    },
     "sqlServerAdminPassword": {
       "value": "not-real-1980!"
     },
@@ -30,23 +27,14 @@
         "dfc-local-nrs"
       ]
     },
-    "threatDetectionEmailAddress": {
-      "value": []
-    },
     "msqlVnetName": {
       "value": ""
     },
     "msqlSubnetName": {
       "value": "dfc-local-msql"
     },
-    "msqlNetworkSecurityGroup": {
-      "value": "dfc-local-msql-nsg"
-    },
     "deployManageSql": {
       "value": true
-    },
-    "msqlResourceGroupName": {
-      "value": ""
     }
   }
 }
