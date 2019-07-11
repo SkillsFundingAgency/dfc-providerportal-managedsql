@@ -18,10 +18,10 @@
       "value": "__sqlAdGroupObjectID__"
     },
     "virtualNetworkRoutedSubnets": {
-      "value": "__virtualNetworkRoutedSubnets__"
+      "value": ["__virtualNetworkRoutedSubnets__"]
     },
     "virtualNetworkNonRoutedSubnets": {
-      "value": "__virtualNetworkNonRoutedSubnets__"
+      "value": ["__virtualNetworkNonRoutedSubnets__"]
     },
     "msqlVnetName": {
       "value": "__msqlVnetName__"
