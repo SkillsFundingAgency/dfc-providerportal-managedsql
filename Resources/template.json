@@ -56,17 +56,12 @@
       "metadata": {
         "description": ""
       }
-    },
-    "msqlVNetResourceGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "The resourcee group where Managaged SQL in located"
-      }
     }
   },
   "variables": {
-    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
-    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-shared/master/Resources/",
+    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/dg/ArmTemplates/",
+    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/NCSD-1029/Resources/",
+    "msqlVNetResourceGroupName": "[concat(parameters('sharedPrefix'),'-rg')]",
     "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
     "managedSQLNSG": "[concat(parameters('sharedPrefix'),'-nsg')]",
     "msqlSubnetName": "[concat(parameters('sharedPrefix'),'-sn')]",
@@ -118,10 +113,10 @@
               "value": "[variables('msqlSubnetName')]"
           },
           "msqlVnetName": {
-              "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/', variables('msqlVnetName'))]"
+              "value": "[resourceid(variables('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/', variables('msqlVnetName'))]"
           },
           "msqlVNetResourceGroupName": {
-              "value": "[parameters('msqlVNetResourceGroupName')]"
+              "value": "[variables('msqlVNetResourceGroupName')]"
           }
         }
       }
@@ -142,7 +137,7 @@
             "value": "[variables('msqlServerName')]"
           },
           "msqlSubnetId": {
-            "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', variables('msqlVnetName'), variables('msqlSubnetName'))]"
+            "value": "[resourceid(variables('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', variables('msqlVnetName'), variables('msqlSubnetName'))]"
           },
           "sqlServerAdminUserName": {
             "value": "[parameters('sqlServerAdminUserName')]"
