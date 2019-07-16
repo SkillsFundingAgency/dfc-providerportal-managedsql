@@ -1,0 +1,164 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sharedPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Prefix for all resources created for the project (except storage account, see below). Should be in the format dfc-env-proj"
+      }
+    },
+    "sqlServerAdminUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Azure SQL Server Administrator (SA) username (will auto-generate one if not passed in)"
+      }
+    },
+    "sqlServerAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Azure SQL Server Administrator (SA) password"
+      }
+    },
+    "sqlServerActiveDirectoryAdminLogin": {
+      "type": "string",
+      "metadata": {
+        "description": "The active directory admin that will be assigned to the SQL server"
+      }
+    },
+    "sqlServerActiveDirectoryAdminObjectId": {
+      "type": "string",
+      "metadata": {
+        "description": "The object id of the active directory admin that will be assigned to the SQL server"
+      }
+    },
+    "virtualNetworkAddressPrefix": {
+      "type": "string",
+      "defaultValue": "10.0",
+      "metadata": {
+        "description": "First 2 octects of VNet Private IP address range (VNet prefix)"
+      }
+    },
+    "virtualNetworkRoutedSubnets": {
+      "type": "array",
+      "metadata": {
+        "description": "Array of subnets to create"
+      }
+    },
+    "virtualNetworkNonRoutedSubnets": {
+      "type": "array",
+      "metadata": {
+        "description": "Array of subnets to create"
+      }
+    },
+    "deployManageSql": {
+      "type": "bool",
+      "metadata": {
+        "description": ""
+      }
+    },
+    "msqlVNetResourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "The resourcee group where Managaged SQL in located"
+      }
+    }
+  },
+  "variables": {
+    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
+    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-shared/master/Resources/",
+    "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
+    "managedSQLNSG": "[concat(parameters('sharedPrefix'),'-nsg')]",
+    "msqlSubnetName": "[concat(parameters('sharedPrefix'),'-sn')]",
+    "msqlVnetName": "[concat(parameters('sharedPrefix'),'-vnet')]"
+  },
+  "resources": [
+    {
+      "name": "managedSQLNetwork",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('dfcDevOpsTemplatesUrl'),'network.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "virtualNetworkPrefix": {
+            "value": "[parameters('sharedPrefix')]"
+          },
+          "virtualNetworkAddressPrefix": {
+            "value": "[parameters('virtualNetworkAddressPrefix')]"
+          },
+          "virtualNetworkRoutedSubnets": {
+            "value": "[parameters('virtualNetworkRoutedSubnets')]"
+          },
+          "virtualNetworkNonRoutedSubnets": {
+            "value": "[parameters('virtualNetworkNonRoutedSubnets')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "managedSQLNSG",
+      "type": "Microsoft.Resources/deployments",
+      "condition": "[parameters('deployManageSql')]",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('localTemplatesUrl'), 'network-security-groups/msql-nsg.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "name": {
+            "value": "[variables('managedSQLNSG')]"
+          },
+          "msqlSubnetName": {
+              "value": "[variables('msqlSubnetName')]"
+          },
+          "msqlVnetName": {
+              "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/', variables('msqlVnetName'))]"
+          },
+          "msqlVNetResourceGroupName": {
+              "value": "[parameters('msqlVNetResourceGroupName')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "managedSQL",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "condition": "[parameters('deployManageSql')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('dfcDevOpsTemplatesUrl'),'sql-managed-instance.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "msqlServerName": {
+            "value": "[variables('msqlServerName')]"
+          },
+          "msqlSubnetId": {
+            "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', variables('msqlVnetName'), variables('msqlSubnetName'))]"
+          },
+          "sqlServerAdminUserName": {
+            "value": "[parameters('sqlServerAdminUserName')]"
+          },
+          "sqlServerAdminPassword": {
+            "value": "[parameters('sqlServerAdminPassword')]"
+          },
+          "sqlServerActiveDirectoryAdminLogin": {
+            "value": "[parameters('sqlServerActiveDirectoryAdminLogin')]"
+          },
+          "sqlServerActiveDirectoryAdminObjectId": {
+            "value": "[parameters('sqlServerActiveDirectoryAdminObjectId')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}

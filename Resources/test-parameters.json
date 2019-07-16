@@ -1,0 +1,40 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sharedPrefix": {
+      "value": "dfc-local-shared"
+    },
+    "sqlServerAdminPassword": {
+      "value": "not-real-1980!"
+    },
+    "sqlServerAdminUserName": {
+      "value": "local_usr"
+    },
+    "sqlServerActiveDirectoryAdminLogin": {
+      "value": "AD_GRP_NAME"
+    },
+    "sqlServerActiveDirectoryAdminObjectId": {
+      "value": "12345678-abcd-abcd-abcd-1234567890ab"
+    },
+    "virtualNetworkRoutedSubnets": {
+      "value": [
+        "dfc-local-msql"
+      ]
+    },
+    "virtualNetworkNonRoutedSubnets": {
+      "value": [
+        "dfc-local-nrs"
+      ]
+    },
+    "msqlVnetName": {
+      "value": ""
+    },
+    "msqlSubnetName": {
+      "value": "dfc-local-msql"
+    },
+    "deployManageSql": {
+      "value": true
+    }
+  }
+}

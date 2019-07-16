@@ -1,0 +1,36 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sharedPrefix": {
+      "value": "__sharedPrefix__"
+    },
+    "sqlServerAdminPassword": {
+      "value": "__sqlAdminPassword__"
+    },
+    "sqlServerAdminUserName": {
+      "value": "__sqlAdminLogin__"
+    },
+    "sqlServerActiveDirectoryAdminLogin": {
+      "value": "__sqlAdGroupName__"
+    },
+    "sqlServerActiveDirectoryAdminObjectId": {
+      "value": "__sqlAdGroupObjectID__"
+    },
+    "virtualNetworkRoutedSubnets": {
+      "value": ["__virtualNetworkRoutedSubnets__"]
+    },
+    "virtualNetworkNonRoutedSubnets": {
+      "value": ["__virtualNetworkNonRoutedSubnets__"]
+    },
+    "msqlVnetName": {
+      "value": "__msqlVnetName__"
+    },
+    "msqlSubnetName": {
+      "value": "__msqlSubnetName__"
+    },
+    "deployManageSql": {
+      "value": "__deployManageSql__"
+    }
+  }
+}
