@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "sharedPrefix": {
-      "value": "dfc-local-shared"
+      "value": "dfc-local-msql"
     },
     "sqlServerAdminPassword": {
       "value": "not-real-1980!"
@@ -27,8 +27,11 @@
         "dfc-local-nrs"
       ]
     },
-    "msqlVnetName": {
+    "msqlVNetResourceGroupName": {
       "value": ""
+    },
+    "msqlVnetName": {
+      "value": "dfc-local-msql-rg"
     },
     "msqlSubnetName": {
       "value": "dfc-local-msql"
