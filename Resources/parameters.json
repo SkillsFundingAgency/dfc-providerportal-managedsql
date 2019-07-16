@@ -23,6 +23,9 @@
     "virtualNetworkNonRoutedSubnets": {
       "value": ["__virtualNetworkNonRoutedSubnets__"]
     },
+    "msqlVNetResourceGroupName": {
+      "value": "__msqlVNetResourceGroupName__"
+    },
     "msqlVnetName": {
       "value": "__msqlVnetName__"
     },
