@@ -10,15 +10,6 @@
           },
           "name": {
             "type": "string"
-        },
-        "msqlVNetResourceGroupName": {
-          "value": ""
-        },
-        "msqlVnetName": {
-          "value": "dfc-local-msql-rg"
-        },
-        "msqlSubnetName": {
-          "value": "dfc-local-msql"
         }
     },
     "variables": {
