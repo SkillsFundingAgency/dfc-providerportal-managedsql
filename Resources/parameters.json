@@ -21,7 +21,7 @@
       "value": ["__virtualNetworkRoutedSubnets__"]
     },
     "virtualNetworkNonRoutedSubnets": {
-      "value": ["__virtualNetworkNonRoutedSubnets__"]
+      "value": []
     },
     "deployManagedSql": {
       "value": __deployManageSql__
