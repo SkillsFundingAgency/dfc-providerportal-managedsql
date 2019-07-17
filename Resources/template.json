@@ -51,15 +51,15 @@
         "description": "Array of subnets to create"
       }
     },
-    "deployManageSql": {
+    "deployManagedSql": {
       "type": "bool",
       "metadata": {
-        "description": ""
+        "description": "Boolean for deploying managed sql or not."
       }
     }
   },
   "variables": {
-    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/dg/ArmTemplates/",
+    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
     "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/NCSD-1029/Resources/",
     "msqlVNetResourceGroupName": "[concat(parameters('sharedPrefix'),'-rg')]",
     "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
@@ -97,7 +97,7 @@
     {
       "name": "managedSQLNSG",
       "type": "Microsoft.Resources/deployments",
-      "condition": "[parameters('deployManageSql')]",
+      "condition": "[parameters('deployManagedSql')]",
       "apiVersion": "2017-05-10",
       "properties": {
         "mode": "Incremental",
@@ -108,24 +108,19 @@
         "parameters": {
           "name": {
             "value": "[variables('managedSQLNSG')]"
-          },
-          "msqlSubnetName": {
-              "value": "[variables('msqlSubnetName')]"
-          },
-          "msqlVnetName": {
-              "value": "[resourceid(variables('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/', variables('msqlVnetName'))]"
-          },
-          "msqlVNetResourceGroupName": {
-              "value": "[variables('msqlVNetResourceGroupName')]"
           }
         }
-      }
+      },
+      "dependsOn": [
+        "managedSQLNetwork"
+      ]
+
     },
     {
       "name": "managedSQL",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-05-10",
-      "condition": "[parameters('deployManageSql')]",
+      "condition": "[parameters('deployManagedSql')]",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -152,7 +147,11 @@
             "value": "[parameters('sqlServerActiveDirectoryAdminObjectId')]"
           }
         }
-      }
+      },
+      "dependsOn": [
+        "managedSQLNetwork",
+        "managedSQLNSG"
+      ]
     }
   ],
   "outputs": {}
