@@ -51,22 +51,17 @@
         "description": "Array of subnets to create"
       }
     },
-    "deployManageSql": {
+    "deployManagedSql": {
       "type": "bool",
       "metadata": {
-        "description": ""
-      }
-    },
-    "msqlVNetResourceGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "The resourcee group where Managaged SQL in located"
+        "description": "Boolean for deploying managed sql or not."
       }
     }
   },
   "variables": {
     "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
-    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-shared/master/Resources/",
+    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/NCSD-1029/Resources/",
+    "msqlVNetResourceGroupName": "[concat(parameters('sharedPrefix'),'-rg')]",
     "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
     "managedSQLNSG": "[concat(parameters('sharedPrefix'),'-nsg')]",
     "msqlSubnetName": "[concat(parameters('sharedPrefix'),'-sn')]",
@@ -102,7 +97,7 @@
     {
       "name": "managedSQLNSG",
       "type": "Microsoft.Resources/deployments",
-      "condition": "[parameters('deployManageSql')]",
+      "condition": "[parameters('deployManagedSql')]",
       "apiVersion": "2017-05-10",
       "properties": {
         "mode": "Incremental",
@@ -113,24 +108,19 @@
         "parameters": {
           "name": {
             "value": "[variables('managedSQLNSG')]"
-          },
-          "msqlSubnetName": {
-              "value": "[variables('msqlSubnetName')]"
-          },
-          "msqlVnetName": {
-              "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/', variables('msqlVnetName'))]"
-          },
-          "msqlVNetResourceGroupName": {
-              "value": "[parameters('msqlVNetResourceGroupName')]"
           }
         }
-      }
+      },
+      "dependsOn": [
+        "managedSQLNetwork"
+      ]
+
     },
     {
       "name": "managedSQL",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-05-10",
-      "condition": "[parameters('deployManageSql')]",
+      "condition": "[parameters('deployManagedSql')]",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -142,7 +132,7 @@
             "value": "[variables('msqlServerName')]"
           },
           "msqlSubnetId": {
-            "value": "[resourceid(parameters('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', variables('msqlVnetName'), variables('msqlSubnetName'))]"
+            "value": "[resourceid(variables('msqlVNetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', variables('msqlVnetName'), variables('msqlSubnetName'))]"
           },
           "sqlServerAdminUserName": {
             "value": "[parameters('sqlServerAdminUserName')]"
@@ -157,7 +147,11 @@
             "value": "[parameters('sqlServerActiveDirectoryAdminObjectId')]"
           }
         }
-      }
+      },
+      "dependsOn": [
+        "managedSQLNetwork",
+        "managedSQLNSG"
+      ]
     }
   ],
   "outputs": {}

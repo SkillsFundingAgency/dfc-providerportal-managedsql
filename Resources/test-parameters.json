@@ -19,7 +19,7 @@
     },
     "virtualNetworkRoutedSubnets": {
       "value": [
-        "dfc-local-msql"
+        "dfc-local-msql-sn"
       ]
     },
     "virtualNetworkNonRoutedSubnets": {
@@ -27,17 +27,8 @@
         "dfc-local-nrs"
       ]
     },
-    "msqlVNetResourceGroupName": {
-      "value": ""
-    },
-    "msqlVnetName": {
-      "value": "dfc-local-msql-rg"
-    },
-    "msqlSubnetName": {
-      "value": "dfc-local-msql"
-    },
-    "deployManageSql": {
-      "value": true
+    "deployManagedSql": {
+      "value": true    
     }
   }
 }
