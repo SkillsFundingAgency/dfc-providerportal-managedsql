@@ -27,8 +27,8 @@
         "dfc-local-nrs"
       ]
     },
-    "deployManageSql": {
-      "value": true
+    "deployManagedSql": {
+      "value": true    
     }
   }
 }
