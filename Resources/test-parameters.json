@@ -19,7 +19,7 @@
     },
     "virtualNetworkRoutedSubnets": {
       "value": [
-        "dfc-local-msql"
+        "dfc-local-msql-sn"
       ]
     },
     "virtualNetworkNonRoutedSubnets": {
