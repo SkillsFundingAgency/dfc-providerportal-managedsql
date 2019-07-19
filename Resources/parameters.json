@@ -25,6 +25,9 @@
     },
     "deployManagedSql": {
       "value": __deployManageSql__
+    },
+    "publicDataEndpointEnabled": {
+      "value": true
     }
   }
 }

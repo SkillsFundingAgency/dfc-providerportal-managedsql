@@ -106,6 +106,18 @@
                             "priority": 124,
                             "direction": "Inbound"
                         }
+                    },                    {
+                        "name": "Inbound-PublicEndpoint3342",
+                        "properties": {
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3342",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 125,
+                            "direction": "Inbound"
+                        }
                     },
                     {
                         "name": "Outbound-HTTP",
