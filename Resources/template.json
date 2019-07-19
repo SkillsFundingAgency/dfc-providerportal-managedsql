@@ -202,5 +202,10 @@
       ]
     }
   ],
-  "outputs": {}
+  "outputs": {
+    "managedSQLPublicUri": {
+      "type": "string",
+      "value": "[reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value]"
+    }
+  }
 }
