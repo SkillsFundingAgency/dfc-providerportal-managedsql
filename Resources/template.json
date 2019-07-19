@@ -56,18 +56,43 @@
       "metadata": {
         "description": "Boolean for deploying managed sql or not."
       }
+    },
+    "publicDataEndpointEnabled": {
+      "type": "bool",
+      "metadata": {
+        "description": "Control whether the public endopint is available or not."
+      }
     }
   },
   "variables": {
     "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
-    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/NCSD-1029/Resources/",
+    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/master/Resources/",
+    "storageAccountName": "[concat(replace(parameters('sharedPrefix'),'-',''),'str')]",
     "msqlVNetResourceGroupName": "[concat(parameters('sharedPrefix'),'-rg')]",
     "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
     "managedSQLNSG": "[concat(parameters('sharedPrefix'),'-nsg')]",
     "msqlSubnetName": "[concat(parameters('sharedPrefix'),'-sn')]",
-    "msqlVnetName": "[concat(parameters('sharedPrefix'),'-vnet')]"
+    "msqlVnetName": "[concat(parameters('sharedPrefix'),'-vnet')]",
+    "dataFactoryName": "[concat(parameters('sharedPrefix'),'-df')]"
   },
   "resources": [
+    {
+      "name": "blobStorage",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('dfcDevOpsTemplatesUrl'),'storage-account.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "storageAccountName": {
+            "value": "[variables('storageAccountName')]"
+          }
+        }
+      }
+    },
     {
       "name": "managedSQLNetwork",
       "type": "Microsoft.Resources/deployments",
@@ -145,6 +170,9 @@
           },
           "sqlServerActiveDirectoryAdminObjectId": {
             "value": "[parameters('sqlServerActiveDirectoryAdminObjectId')]"
+          },
+          "publicDataEndpointEnabled": {
+            "value": "[parameters('publicDataEndpointEnabled')]"
           }
         }
       },
@@ -152,7 +180,32 @@
         "managedSQLNetwork",
         "managedSQLNSG"
       ]
+    },
+    {
+    "name": "dataFactory",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('dfcDevOpsTemplatesUrl'),'datafactory.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "DataFactoryName": {
+            "value": "[variables('dataFactoryName')]"
+          }
+        }
+      },
+      "dependsOn": [
+        "blobStorage"
+      ]
     }
   ],
-  "outputs": {}
+  "outputs": {
+    "managedSQLPublicUri": {
+      "type": "string",
+      "value": "[reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value]"
+    }
+  }
 }
