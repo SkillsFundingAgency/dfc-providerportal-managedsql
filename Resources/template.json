@@ -65,8 +65,8 @@
     }
   },
   "variables": {
-    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/NCSD-1007/ArmTemplates/",
-    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/NCSD-1007/Resources/",
+    "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
+    "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/master/Resources/",
     "storageAccountName": "[concat(replace(parameters('sharedPrefix'),'-',''),'str')]",
     "msqlVNetResourceGroupName": "[concat(parameters('sharedPrefix'),'-rg')]",
     "msqlServerName": "[concat(parameters('sharedPrefix'),'-msql')]",
