@@ -203,7 +203,7 @@
     }
   ],
   "outputs": {
-    "managedSQLHostUri": {
+    "managedSQLPublicUri": {
       "type": "string",
       "value": "[replace(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, '.database.windows.net', '')]"
     }
