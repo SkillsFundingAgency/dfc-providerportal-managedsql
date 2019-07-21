@@ -203,9 +203,13 @@
     }
   ],
   "outputs": {
+    "msqlServerName": {
+      "type": "string",
+      "value": "[variables('msqlServerName')]"
+    },
     "managedSQLPublicUri": {
       "type": "string",
-      "value": "[replace(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, '.database.windows.net', '')]"
+      "value": "[replace(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, variables('msqlServerName'), '')]"
     }
   }
 }
