@@ -1,0 +1,81 @@
+{
+    "name": "Execute SSIS transform",
+    "properties": {
+        "description": "This pipeline executes the tribal importer with the DEV/SIT environment settings",
+        "activities": [
+            {
+                "name": "Execute SSIS package on DEV",
+                "description": "Execute the tribal importer for the DEV platform",
+                "type": "ExecuteSSISPackage",
+                "typeProperties": {
+                    "packageLocation": {
+                        "packagePath": "TribalImporter/TribalToNCS-Importer/TribalToNCSImporter.dtsx",
+                        "type": "SSISDB"
+                    },
+                    "environmentPath": null,
+                    "connectVia": {
+                        "referenceName": "tribalSSIS",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "loggingLevel": "Basic",
+                    "packageConnectionManagers": {
+                        "SourceConnection": {
+                            "ConnectionString": {
+                                "value": "__SourceConnectionString__"
+                            }
+                        },
+                        "TargetConnection": {
+                            "ConnectionString": {
+                                "value": "__TargetConnectionStringDev__"
+                            }
+                        }
+                    }
+                },
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                }
+            },
+            {
+                "name": "Execute SSIS package on SIT",
+                "description": "Execute the tribal importer for the SIT platform",
+                "type": "ExecuteSSISPackage",
+                "typeProperties": {
+                    "packageLocation": {
+                        "packagePath": "TribalImporter/TribalToNCS-Importer/TribalToNCSImporter.dtsx",
+                        "type": "SSISDB"
+                    },
+                    "environmentPath": null,
+                    "connectVia": {
+                        "referenceName": "tribalSSIS",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "loggingLevel": "Basic",
+                    "packageConnectionManagers": {
+                        "SourceConnection": {
+                            "ConnectionString": {
+                                "value": "__SourceConnectionString__"
+                            }
+                        },
+                        "TargetConnection": {
+                            "ConnectionString": {
+                                "value": "__TargetConnectionStringSit__"
+                            }
+                        }
+                    }
+                },
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+
+            }
+        ]
+    }
+}
