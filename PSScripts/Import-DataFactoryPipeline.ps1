@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Create/Update an Azure Data Factory pipeline via a json-bsaed definition
+Create/Update an Azure Data Factory pipeline via a json-based definition
 
 .DESCRIPTION
-Create/Update an Azure Data Factory pipeline via a json-bsaed definition
+Create/Update an Azure Data Factory pipeline via a json-based definition
 
 .PARAMETER ResourceGroupName
 The name of the resource group that contains the Data Factory instance
@@ -19,7 +19,7 @@ The full path to the json-based pipeline defintion file
 
 
 .EXAMPLE
-Import-AzureDataFactoryPipeline -ResourceGroupName dfc-foo-bar-rg -DataFactoryName dfc-foo-bar-df -PipelineName "An DataFactory Pipeline"   -DefinitionFile $(System.DefaultWorkingDirectory)/DefinitionFile -Verbose
+Import-AzureDataFactoryPipeline -ResourceGroupName dfc-foo-bar-rg -DataFactoryName dfc-foo-bar-df -PipelineName "An DataFactory Pipeline" -DefinitionFile $(System.DefaultWorkingDirectory)/DefinitionFile -Verbose
 
 #>
 [CmdletBinding()]

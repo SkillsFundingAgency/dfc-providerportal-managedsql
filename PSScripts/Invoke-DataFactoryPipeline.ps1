@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Execute an Azure Data Factory pipeline via a json-bsaed definition
+Execute an Azure Data Factory pipeline via a json-based definition
 
 .DESCRIPTION
-Execute an Azure Data Factory pipeline via a json-bsaed definition
+Execute an Azure Data Factory pipeline via a json-based definition
 
 .PARAMETER ResourceGroupName
 The name of the resource group that contains the Data Factory instance
@@ -12,7 +12,7 @@ The name of the resource group that contains the Data Factory instance
 The name of the Data Factory instance
 
 .PARAMETER PipelineName
-The name of the Data Factory pipeline to update
+The name of the Data Factory pipeline to execute
 
 
 .EXAMPLE
@@ -29,4 +29,4 @@ Param(
     [String]$PipelineName
 )
 
-Invoke-AzDataFactoryV2Pipeline -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -PipelineName $PipelineName -Force -Verbose:$VerbosePreference
+Invoke-AzDataFactoryV2Pipeline -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -PipelineName $PipelineName -Verbose:$VerbosePreference

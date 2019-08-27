@@ -21,7 +21,7 @@
                     "packageConnectionManagers": {
                         "SourceConnection": {
                             "ConnectionString": {
-                                "value": "__SourceConnectionString__"
+                                "value": "__SourceConnectionStringDev__"
                             }
                         },
                         "TargetConnection": {
@@ -57,7 +57,7 @@
                     "packageConnectionManagers": {
                         "SourceConnection": {
                             "ConnectionString": {
-                                "value": "__SourceConnectionString__"
+                                "value": "__SourceConnectionStringDev__"
                             }
                         },
                         "TargetConnection": {
@@ -73,8 +73,7 @@
                     "retryIntervalInSeconds": 30,
                     "secureOutput": false,
                     "secureInput": false
-                },
-
+                }
             }
         ]
     }
