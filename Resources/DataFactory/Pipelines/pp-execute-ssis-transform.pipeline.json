@@ -62,7 +62,7 @@
                     "packageConnectionManagers": {
                         "SourceConnection": {
                             "ConnectionString": {
-                                "value": "__SourceConnectionStringPrd__"
+                                "value": "__SourceConnectionStringPP__"
                             }
                         },
                         "TargetConnection": {
