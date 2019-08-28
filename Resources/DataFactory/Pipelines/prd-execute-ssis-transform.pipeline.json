@@ -1,13 +1,13 @@
 {
-    "name": "Execute tribal importer - PP",
+    "name": "Execute tribal importer - PRD",
     "properties":
     {
-        "description": "This pipeline executes the tribal importer with the PP environment settings",
+        "description": "This pipeline executes the tribal importer with the PRD environment settings",
         "activities":
         [
             {
-                "name": "Execute SSIS package on PP",
-                "description": "Execute the tribal importer for the PP platform",
+                "name": "Execute SSIS package on PRD",
+                "description": "Execute the tribal importer for the PRD platform",
                 "type": "ExecuteSSISPackage",
                 "typeProperties":
                 {
@@ -26,7 +26,7 @@
                             "value": "__SourceConnectionString__"
                         },
                         "TargetConnection": {
-                            "value": "__TargetConnectionStringPP__"
+                            "value": "__TargetConnectionStringPRD__"
                         }
                     }
                 },

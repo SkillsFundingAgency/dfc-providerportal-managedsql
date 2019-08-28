@@ -1,7 +1,7 @@
 {
-    "name": "Execute SSIS transform",
+    "name": "Execute tribal importer - DEV",
     "properties": {
-        "description": "This pipeline executes the tribal importer with the DEV/SIT environment settings",
+        "description": "This pipeline executes the tribal importer with the DEV environment settings",
         "activities": [
             {
                 "name": "Execute SSIS package on DEV",
@@ -18,52 +18,12 @@
                         "type": "IntegrationRuntimeReference"
                     },
                     "loggingLevel": "Basic",
-                    "packageConnectionManagers": {
+                    "projectParameters": {
                         "SourceConnection": {
-                            "ConnectionString": {
-                                "value": "__SourceConnectionStringDev__"
-                            }
+                            "value": "__SourceConnectionString__"
                         },
                         "TargetConnection": {
-                            "ConnectionString": {
-                                "value": "__TargetConnectionStringDev__"
-                            }
-                        }
-                    }
-                },
-                "policy": {
-                    "timeout": "7.00:00:00",
-                    "retry": 0,
-                    "retryIntervalInSeconds": 30,
-                    "secureOutput": false,
-                    "secureInput": false
-                }
-            },
-            {
-                "name": "Execute SSIS package on SIT",
-                "description": "Execute the tribal importer for the SIT platform",
-                "type": "ExecuteSSISPackage",
-                "typeProperties": {
-                    "packageLocation": {
-                        "packagePath": "TribalImporter/TribalToNCS-Importer/TribalToNCSImporter.dtsx",
-                        "type": "SSISDB"
-                    },
-                    "environmentPath": null,
-                    "connectVia": {
-                        "referenceName": "tribalSSIS",
-                        "type": "IntegrationRuntimeReference"
-                    },
-                    "loggingLevel": "Basic",
-                    "packageConnectionManagers": {
-                        "SourceConnection": {
-                            "ConnectionString": {
-                                "value": "__SourceConnectionStringDev__"
-                            }
-                        },
-                        "TargetConnection": {
-                            "ConnectionString": {
-                                "value": "__TargetConnectionStringSit__"
-                            }
+                            "value": "__TargetConnectionStringDev__"
                         }
                     }
                 },
