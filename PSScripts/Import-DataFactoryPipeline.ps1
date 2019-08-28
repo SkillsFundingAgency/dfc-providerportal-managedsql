@@ -35,8 +35,8 @@ Param(
 )
 
 
-if(-not (Test-Path $DefinitionFile)) {
+if(! (Test-Path $DefinitionFile)) {
     Write-Error "Definition file '$DefinitionFile' does not exist!"
 }
 
-Set-AzDataFactoryV2Pipeline -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -PipelineName $PipelineName -DefinitionFile $DefinitionFile -Force -Verbose:$VerbosePreference
+Set-AzDataFactoryV2Pipeline -ResourceGroupName $ResourceGroupName -DataFactoryName $DataFactoryName -PipelineName $PipelineName -DefinitionFile $DefinitionFile -Force
