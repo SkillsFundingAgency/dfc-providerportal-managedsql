@@ -1,0 +1,40 @@
+{
+    "name": "Execute tribal importer - SIT",
+    "properties": {
+        "description": "This pipeline executes the tribal importer with the SIT environment settings",
+        "activities": [
+            {
+                "name": "Execute SSIS package on SIT",
+                "description": "Execute the tribal importer for the SIT platform",
+                "type": "ExecuteSSISPackage",
+                "typeProperties": {
+                    "packageLocation": {
+                        "packagePath": "TribalImporter/TribalToNCS-Importer/TribalToNCSImporter.dtsx",
+                        "type": "SSISDB"
+                    },
+                    "environmentPath": null,
+                    "connectVia": {
+                        "referenceName": "tribalSSIS",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "loggingLevel": "Basic",
+                    "projectParameters": {
+                        "SourceConnection": {
+                            "value": "__SourceConnectionString__"
+                        },
+                        "TargetConnection": {
+                            "value": "__TargetConnectionStringSit__"
+                        }
+                    }
+                },
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": true,
+                    "secureInput": true
+                }
+            }
+        ]
+    }
+}

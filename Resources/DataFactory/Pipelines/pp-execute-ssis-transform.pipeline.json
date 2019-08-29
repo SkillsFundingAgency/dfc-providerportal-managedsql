@@ -1,0 +1,44 @@
+{
+    "name": "Execute tribal importer - PP",
+    "properties":
+    {
+        "description": "This pipeline executes the tribal importer with the PP environment settings",
+        "activities":
+        [
+            {
+                "name": "Execute SSIS package on PP",
+                "description": "Execute the tribal importer for the PP platform",
+                "type": "ExecuteSSISPackage",
+                "typeProperties":
+                {
+                    "packageLocation": {
+                        "packagePath": "TribalImporter/TribalToNCS-Importer/TribalToNCSImporter.dtsx",
+                        "type": "SSISDB"
+                    },
+                    "environmentPath": null,
+                    "connectVia": {
+                        "referenceName": "tribalSSIS",
+                        "type": "IntegrationRuntimeReference"
+                    },
+                    "loggingLevel": "Basic",
+                    "projectParameters": {
+                        "SourceConnection": {
+                            "value": "__SourceConnectionString__"
+                        },
+                        "TargetConnection": {
+                            "value": "__TargetConnectionStringPP__"
+                        }
+                    }
+                },
+                "policy":
+                {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": true,
+                    "secureInput": true
+                }
+            }
+        ]
+    }
+}

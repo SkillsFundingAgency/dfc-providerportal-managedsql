@@ -1,5 +1,3 @@
-# dotnet core build
-
 resources:
   repositories:
   - repository: self
@@ -24,6 +22,12 @@ steps:
   parameters:
     ArmTemplateRoot: '$(System.DefaultWorkingDirectory)\Resources'
     steps:
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'PSScripts/*.ps1'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1
   displayName: Publish Artifact
   inputs:
