@@ -17,15 +17,17 @@
                         "referenceName": "tribalSSIS",
                         "type": "IntegrationRuntimeReference"
                     },
-                    "loggingLevel": "Basic",
+                    "loggingLevel": "Verbose",
                     "projectParameters": {
-                        "SourceConnection": {
+                        "SourceConnection_ConnectionString": {
                             "value": "__SourceConnectionString__"
                         },
-                        "TargetConnection": {
+                        "TargetConnection_ConnectionString": {
                             "value": "__TargetConnectionStringDev__"
                         }
-                    }
+                    },
+                    "projectConnectionManagers": {},
+                    "packageConnectionManagers": {}
                 },
                 "policy": {
                     "timeout": "7.00:00:00",

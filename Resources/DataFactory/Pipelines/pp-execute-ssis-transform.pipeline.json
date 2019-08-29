@@ -20,15 +20,17 @@
                         "referenceName": "tribalSSIS",
                         "type": "IntegrationRuntimeReference"
                     },
-                    "loggingLevel": "Basic",
+                    "loggingLevel": "Verbose",
                     "projectParameters": {
-                        "SourceConnection": {
+                        "SourceConnection_ConnectionString": {
                             "value": "__SourceConnectionString__"
                         },
-                        "TargetConnection": {
+                        "TargetConnection_ConnectionString": {
                             "value": "__TargetConnectionStringPP__"
                         }
-                    }
+                    },
+                    "projectConnectionManagers": {},
+                    "packageConnectionManagers": {}
                 },
                 "policy":
                 {
