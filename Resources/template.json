@@ -182,7 +182,7 @@
       ]
     },
     {
-    "name": "dataFactory",
+      "name": "dataFactory",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2017-05-10",
       "properties": {
@@ -200,6 +200,45 @@
       "dependsOn": [
         "blobStorage"
       ]
+    },
+    {
+      "name": "tribalSSISIntegrationRuntime",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('dfcDevOpsTemplatesUrl'),'DataFactory/datafactory-ssis-integration-runtime.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "DataFactoryName": {
+            "value": "[variables('dataFactoryName')]"
+          },
+          "RuntimeName": {
+            "value": "tribalSSIS"
+          },
+          "RuntimeDescription": {
+            "value": "SSIS runtime for transforming Tribal data"
+          },
+          "NodeSize": {
+            "value": "Standard_D8_v3"
+          },
+          "CatalogServerEndpoint": {
+            "value": "[concat(replace(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, variables('msqlServerName'), ''), ', 3342')]"
+          },
+          "CatalogServerAdminUsername": {
+            "value": "[parameters('sqlServerAdminUserName')]"
+          },
+          "CatalogServerAdminPassword": {
+            "value": "[parameters('sqlServerAdminPassword')]"
+          }
+        }
+      },
+      "dependsOn": [
+        "dataFactory",
+        "managedSQL"
+      ]      
     }
   ],
   "outputs": {
