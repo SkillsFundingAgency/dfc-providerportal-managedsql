@@ -225,7 +225,7 @@
             "value": "Standard_D8_v3"
           },
           "CatalogServerEndpoint": {
-            "value": "[concat(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, ', 3342')]"
+            "value": "[concat(variables('msqlServerName'), '.public', replace(reference('managedSQL','2017-05-10').outputs.fullyQualifiedDomainName.value, variables('msqlServerName'), ''), ', 3342')]"
           },
           "CatalogServerAdminUsername": {
             "value": "[parameters('sqlServerAdminUserName')]"
