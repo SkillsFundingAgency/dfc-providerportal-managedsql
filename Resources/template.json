@@ -292,7 +292,7 @@
           }
       },
       "dependsOn": [
-          "[variables('dataFactoryName')]"
+          "dataFactory"
       ]
     }
   ],
