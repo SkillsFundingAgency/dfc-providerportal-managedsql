@@ -65,7 +65,7 @@
     }
   },
   "variables": {
-    "sharedPrefix": "[tolower(concat('dfc-', parameters('environment'), 'msql'))]",
+    "sharedPrefix": "[tolower(concat('dfc-', parameters('environment'), '-msql'))]",
     "dfcDevOpsTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-devops/master/ArmTemplates/",
     "localTemplatesUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/dfc-providerportal-managedsql/master/Resources/",
     "storageAccountName": "[concat(replace(variables('sharedPrefix'),'-',''),'str')]",
