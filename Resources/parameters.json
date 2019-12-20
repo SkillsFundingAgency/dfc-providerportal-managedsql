@@ -2,8 +2,8 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "sharedPrefix": {
-      "value": "__sharedPrefix__"
+    "environment": {
+      "value": "__envAbbreviation__"
     },
     "sqlServerAdminPassword": {
       "value": "__sqlAdminPassword__"
