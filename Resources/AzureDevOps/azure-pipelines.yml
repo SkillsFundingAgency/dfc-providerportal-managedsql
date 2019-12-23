@@ -13,7 +13,7 @@ pr:
     - master
 
 pool:
-  name: "Continuous Integration 02 - SSD - 160ACU"
+  name: "NCS - CI and CD"
 
 steps:
 
