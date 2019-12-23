@@ -75,7 +75,8 @@
     "msqlSubnetName": "[concat(variables('sharedPrefix'),'-sn')]",
     "msqlVnetName": "[concat(variables('sharedPrefix'),'-vnet')]",
     "dataFactoryName": "[concat(variables('sharedPrefix'),'-df')]",
-    "actionGroupName": "[tolower(concat('dfc-', parameters('environment'),'-prov-monitor-df-actgrp'))]"
+    "actionGroupName": "[tolower(concat('dfc-', parameters('environment'),'-prov-monitor-df-actgrp'))]",
+    "actionGroupResourceGroup": "[tolower(concat('dfc-', parameters('environment'),'-prov-monitor-rg'))]"
   },
   "resources": [
     {
@@ -285,6 +286,9 @@
               },
               "actionGroupName": {
                   "value": "[variables('actionGroupName')]"
+              },
+              "actionGroupResourceGroup": {
+                  "value": "[variables('actionGroupResourceGroup')]"
               },
               "resourceId": {
                   "value": "[resourceId('Microsoft.DataFactory/factories', variables('dataFactoryName'))]"
